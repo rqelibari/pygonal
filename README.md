@@ -1,16 +1,19 @@
-Planar Overview
+Pygonal Overview
 ===============
 
-Planar is a 2D geometry library for Python. It is intended for use by games
-and interactive real-time applications, but is designed to be useful for
-most any program that needs a convenient, high-performance geometry API.
+Pygonal is a 2D geometry library for Python. It is a fork of [planar][11]
+developed by Casey Duncan until 2011.
+It is intended for use by games and interactive real-time applications,
+but is designed to be useful for most any program that needs a convenient,
+high-performance geometry API.
 
-Planar is being developed as part of the larger Grease game framework. 
-However, it is a standalone library and has no external dependencies besides
+Pygonal is a standalone library and has no external dependencies besides
 Python, and optionally a C compiler.
 
-Planar is purely a math library, presentation, graphical or otherwise is
+Pygonal is purely a math library, presentation, graphical or otherwise is
 left up to the application.
+
+[11]: <https://bitbucket.org/caseman/planar/> "Planar Repository"
 
 Project Goals
 -------------
@@ -23,63 +26,55 @@ Project Goals
 * 100% test coverage.
 * Full narrative and API reference documentation.
 * Platform-independent.
-* Release early and often.
 * Be responsive to community input.
-* Don't take ourselves too seriously.
 
 License
 -------
 
-Planar is distributed under the terms of the new BSD license. You are free to
-use it for commercial or non-commercial projects with little or no
-restriction, all we ask is that:
-
-* Redistributions of the code, in whole or part, retain the original
-  copyright notice and license text.
-* You do not claim our endorsement of any derived product.
-
+Pygonal is distributed under the terms of the Apache 2.0 license.
 For a complete text of the license see the ``LICENSE.txt`` file in the source
 distrbution.
 
-Acknowledgements 
+Acknowledgements
 ----------------
 
-The API for planar, and some of the code is derived from the excellent 
-work done by the Super Effective Team, thanks guys!
+The API for Pygonal, and some of the code is derived from the excellent
+work done by the [Super Effective Team][41] and [Casey Duncan][42], thanks guys!
 
-* http://www.supereffective.org/pages/Vector-2d-Vector-Library
+[41]: http://www.supereffective.org/pages/Vector-2d-Vector-Library
+[42]: https://github.com/caseman
 
 Requirements
 ------------
 
-Planar requires Python 2.6, 2.7, 3.1, or better.
+Pygonal requires Python 2.6, 2.7, 3.1, or better.
 
 To experience the exhilaration of native-code performance, a C compiler is
 required. If someone volunteers, binary releases for platforms where this
 is not common (you know who you are) will be happily made available.
 
-Downloading Planar
+Downloading Pygonal
 ------------------
 
-Planar releases can be downloaded from the python package index (pypi):
+Pygonal releases can be downloaded from the python package index (pypi):
 
-* http://pypi.python.org/pypi/planar/
+* http://pypi.python.org/pypi/pygonal/
 
-You can get the latest code in development from the planar mercurial 
-repository on bitbucket:
+You can get the latest code in development from the Pygonal git
+repository on github:
 
-* http://bitbucket.org/caseman/planar/
+* https://github.com/rqelibari/pygonal/
 
 Installation
 ------------
 
-To build and install Planar from the source distribution or repository use::
+To build and install Pygonal from the source distribution or repository use::
 
     python setup.py install
 
 To install only the pure-Python modules without compiling, use::
 
-	python setup.py build_py install --skip-build
+    python setup.py build_py install --skip-build
 
 Only performance is sacrificed without the C extensions, all functionality is
 still available when using only the pure-Python modules.
@@ -87,10 +82,10 @@ still available when using only the pure-Python modules.
 Tests
 -----
 
-Planar requires nose for testing. You can install it for Python 2.x
+Pygonal requires nose for testing. You can install it for Python 2.x
 using easy_install::
 
-	easy_install nose
+    easy_install nose
 
 For Python 3.x, you can download and install distribute from here:
 
@@ -104,11 +99,11 @@ properly on Python 3.1 here:
 Once nose is installed you can run the tests from the source directory
 using ``nosetests``, first building the C extensions, like so (on Unix)::
 
-	python setup.py build && nosetests -d -w build/lib.*/planar/
-	
+    python setup.py build && nosetests -d -w build/lib.*/pygonal/
+
 This runs the tests inside the ``build`` directory so that the C extensions
 can be tested. You can put a ``3`` suffix on the ``python`` and ``nosetests``
-commands above for Python 3.x. 
+commands above for Python 3.x.
 
 Documentation
 -------------
@@ -123,9 +118,6 @@ The same documentation is also available for offline browsing in the
 Contributing and Getting Support
 --------------------------------
 
-Come visit us at the Grease users google group to get help, moral support,
-lavish praise, complain bitterly, report a bug, or contribute ideas:
-
-* http://groups.google.com/group/grease-users
+* *05 August 2016* More information is following.
 
 
