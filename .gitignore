@@ -3,7 +3,7 @@ syntax: glob
 *.pyc
 *.o
 *~
-.*
 MANIFEST
 build/*
 dist/*
+
