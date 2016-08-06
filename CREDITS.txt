@@ -1,0 +1,9 @@
+Credits
+
+This application uses Open Source components. You can find the source code of
+their open source projects along with license information below. We acknowledge
+and are grateful to these developers for their contributions to open source.
+
+Project: planar https://bitbucket.org/caseman/planar/
+Copyright (c) 2010 by Casey Duncan
+License (new BSD) https://bitbucket.org/caseman/planar/raw/9f8615991eddf9dbd5439b10cd17906e506a6b5f/LICENSE.txt
