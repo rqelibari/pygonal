@@ -29,18 +29,21 @@ error=0
 
 rm -rf build
 
-for ver in 2.6 2.7 3 3.5; do
+OLDPYTHONPATH="${PYTHONPATH}";
+export PYTHONPATH="./pygonal/tests:${PYTHONPATH}";
+for ver in 2.7 3 3.5; do
 	echo "************"
 	echo " Python $ver"
 	echo "************"
 	echo
 	if which python${ver}; then
-		python${ver} -m unittest pygonal.test  || error=1
+		python${ver} -m unittest discover || error=1
 	else
 		echo >&2 "!!! Python ${ver} not found !!!"
 		error=1
 	fi
 done
+export PYTHONPATH="${OLDPYTHONPATH}";
 
 echo
 echo -n "Doctests... "
