@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Planar documentation build configuration file, created by
+# pygonal documentation build configuration file, created by
 # sphinx-quickstart on Mon Apr  5 22:12:06 2010.
 #
 # This file is execfile()d with the current directory set to its containing dir.
@@ -41,7 +41,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Planar'
+project = u'pygonal'
 copyright = u'2010, Casey Duncan'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -162,7 +162,7 @@ html_static_path = ['_static']
 #html_file_suffix = ''
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'Planardoc'
+htmlhelp_basename = 'Pygonaldoc'
 
 
 # -- Options for LaTeX output --------------------------------------------------
@@ -176,7 +176,7 @@ htmlhelp_basename = 'Planardoc'
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'Planar.tex', u'Planar Documentation',
+  ('index', 'Pygonal.tex', u'Pygonal Documentation',
    u'Casey Duncan', 'manual'),
 ]
 

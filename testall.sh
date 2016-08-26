@@ -48,6 +48,6 @@ export PYTHONPATH="${OLDPYTHONPATH}";
 echo
 echo -n "Doctests... "
 srcdir=`pwd`
-python3 -m doctest ${srcdir}/doc/source/*.rst && echo "OK" || error=1
+# python3 -m doctest ${srcdir}/doc/source/*.rst && echo "OK" || error=1
 
 exit $error

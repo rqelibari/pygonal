@@ -1,14 +1,14 @@
-:mod:`planar` -- Global Definitions
+:mod:`pygonal` -- Global Definitions
 ===================================
 
-.. module:: planar
+.. module:: pygonal
    :synopsis: Global Definitions
 .. moduleauthor:: Casey Duncan <casey dot duncan at gmail dot com>
 
 
 .. data:: __versioninfo__
 
-   Package version as a tuple of three integers: 
+   Package version as a tuple of three integers:
    ``(major_version, minor_version, bugfix_version)``.
 
 .. data:: __version__

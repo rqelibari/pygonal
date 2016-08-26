@@ -1,9 +1,9 @@
-:class:`planar.Ray` -- Infinite Semi-Lines
+:class:`pygonal.Ray` -- Infinite Semi-Lines
 ==========================================
 
 .. index:: Ray, ray class
 
-.. autoclass:: planar.Ray
+.. autoclass:: pygonal.Ray
 	:members:
 	:inherited-members:
 

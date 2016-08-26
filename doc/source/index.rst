@@ -1,12 +1,12 @@
-.. Planar documentation master file
+.. pygonal documentation master file
 
-Planar Documentation Contents
+Pygonal Documentation Contents
 =============================
 
-Planar is a 2D geometry library for Python designed for use by
+Pygonal is a 2D geometry library for Python designed for use by
 games and other interactive applications.
 
-Planar was created for use by the `Grease game framework <http://www.pygamesf.org/~casey/grease/doc/>`_, but is distributed as a separate standalone library so that it can be more useful for everyone.
+Pygonal was created for use by the `Grease game framework <http://www.pygamesf.org/~casey/grease/doc/>`_, but is distributed as a separate standalone library so that it can be more useful for everyone.
 
 .. toctree::
    :maxdepth: 2
@@ -24,7 +24,7 @@ Reference
 .. toctree::
    :maxdepth: 2
 
-   planarref
+   pygonalref
    vectorref
    vec2arrayref
    affineref

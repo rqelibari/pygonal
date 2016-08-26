@@ -1,9 +1,9 @@
-:class:`planar.LineSegment` -- Line Segments
+:class:`pygonal.LineSegment` -- Line Segments
 ============================================
 
 .. index:: LineSegment, line segment class
 
-.. autoclass:: planar.LineSegment
+.. autoclass:: pygonal.LineSegment
 	:members:
 	:inherited-members:
 

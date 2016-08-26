@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from __future__ import division
+import math
+import unittest
 '''
     Pygonal
 
@@ -23,9 +25,6 @@ from __future__ import division
     See LICENSE.txt and CREDITS.txt
 '''
 """Vector class unit tests"""
-import sys
-import math
-import unittest
 
 
 class Vec2BaseTestCase(object):
@@ -463,9 +462,14 @@ class VectorSeqBaseTestCase(object):
 
     def test_iter(self):
         i = iter(self.VecSeq([(-1,1.5), (3, 4.1)]))
-        self.assertEqual(i.next(), self.Vec2(-1, 1.5))
-        self.assertEqual(i.next(), self.Vec2(3, 4.1))
-        self.assertRaises(StopIteration, i.next)
+        try:
+            self.assertEqual(i.__next__(), self.Vec2(-1, 1.5))
+            self.assertEqual(i.__next__(), self.Vec2(3, 4.1))
+            self.assertRaises(StopIteration, i.__next__)
+        except AttributeError:
+            self.assertEqual(i.next(), self.Vec2(-1, 1.5))
+            self.assertEqual(i.next(), self.Vec2(3, 4.1))
+            self.assertRaises(StopIteration, i.next)
 
     def test_get_set_item(self):
         a = self.VecSeq([(0,1), (2,3)])

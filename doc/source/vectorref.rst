@@ -1,14 +1,14 @@
-:class:`planar.Vec2` -- 2D Vectors
+:class:`pygonal.Vec2` -- 2D Vectors
 ==================================
 
 .. index:: Vec2, vector class
 
-.. autoclass:: planar.Vec2
+.. autoclass:: pygonal.Vec2
 	:members:
 
 .. index:: Point
 
-.. class:: planar.Point
+.. class:: pygonal.Point
 
-	An alias for :class:`~planar.Vec2`. Useful for
+	An alias for :class:`~pygonal.Vec2`. Useful for
 	code clarity.

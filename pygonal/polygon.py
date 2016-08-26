@@ -21,15 +21,17 @@
 
     See LICENSE.txt and CREDITS.txt
 '''
-
 from __future__ import division
-
-import sys
-import math
-import itertools
+try:
+    # Python 2
+    from future_builtins import filter
+except ImportError:
+    # Python 3
+    pass
 import bisect
 import pygonal
-from pygonal.util import cached_property, assert_unorderable, cos_sin_deg
+from pygonal.util import cos_sin_deg
+
 
 class Polygon(pygonal.Seq2):
     """Arbitrary polygon represented as a list of vertices.
@@ -72,7 +74,7 @@ class Polygon(pygonal.Seq2):
     """
 
     def __init__(self, vertices, is_convex=None, is_simple=None):
-        #super(Polygon, self).__init__(vertices)
+        super(Polygon, self).__init__(vertices)
         if len(self) < 3:
             raise ValueError("Polygon(): minimum of 3 vertices required")
         self._clear_cached_properties()
@@ -244,8 +246,7 @@ class Polygon(pygonal.Seq2):
             (last_delta.x < 0) * 1 or
             (last_delta.y > 0) * -1 or
             (last_delta.y < 0) * 1) or 0
-        for delta in itertools.ifilter(
-            lambda v: v, self._iter_edge_vectors()):
+        for delta in filter(lambda v: v, self._iter_edge_vectors()):
             count += 1
             this_dir = (
                 (delta.x > 0) * -1 or

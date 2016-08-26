@@ -21,9 +21,7 @@
 
     See LICENSE.txt and CREDITS.txt
 '''
-
 from __future__ import division
-
 import math
 import pygonal
 from pygonal.util import cached_property, assert_unorderable, cos_sin_deg
@@ -93,9 +91,12 @@ class Vec2(tuple):
         """
         return self.length2 < pygonal.EPSILON2
 
-    def __nonzero__(self):
+    def __bool__(self):
         """A vector is True if it is not the null vector."""
         return self[0] != 0.0 or self[1] != 0.0
+
+    def __nonzero__(self):
+        return self.__bool__()
 
     def almost_equals(self, other):
         """Compare vectors for approximate equality.
@@ -104,10 +105,13 @@ class Vec2(tuple):
         :type other: Vec2
         :return: True if distance between the vectors < ``EPSILON``.
         """
+        import math
         ox, oy = other
         dx = self[0] - ox
         dy = self[1] - oy
-        return (dx*dx + dy*dy) < pygonal.EPSILON2
+        distance2 = dx * dx + dy * dy
+        logNum = abs(int(math.log10(pygonal.EPSILON2)))
+        return round(distance2, logNum) < pygonal.EPSILON2
 
     def normalized(self):
         """Return the vector scaled to unit length. If the vector
@@ -354,6 +358,18 @@ class Vec2(tuple):
         except Exception:
             return NotImplemented
         return tuple.__new__(Vec2, (self[0] - ox, self[1] - oy))
+
+    def __rsub__(self, other):
+        """Subtract this vector from the other vector componentwise.
+
+        :param other: The vector from which to substract.
+        :type other: Vec2|tuple
+        """
+        try:
+            ox, oy = other
+        except Exception:
+            return NotImplemented
+        return tuple.__new__(Vec2, (ox - self[0], oy - self[1]))
 
     __isub__ = __sub__
 
@@ -716,7 +732,7 @@ class Vec2Array(Seq2):
         :type other: Seq2
         :rtype: same type as other
         """
-        if isinstance(other, Seq2):
+        if isinstance(other, Seq2) or isinstance(other, tuple):
             if len(self) == len(other):
                 return other.from_points(
                     b - a for a, b in zip(self, other))
@@ -794,8 +810,9 @@ class Vec2Array(Seq2):
                 try:
                     b = Vec2(*other)
                 except Exception:
-                    raise TypeError("Cannot multiply %s with %s"
-                        % (type(self).__name__, type(other).__name__))
+                    raise TypeError("Cannot multiply %s with %s" %
+                                    (type(self).__name__,
+                                     type(other).__name__))
             self._vectors = [a * b for a in self]
         return self
 

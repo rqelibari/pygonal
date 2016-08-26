@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from __future__ import division
+import pygonal
 '''
     Pygonal
 
@@ -21,10 +23,6 @@
 
     See LICENSE.txt and CREDITS.txt
 '''
-
-from __future__ import division
-import pygonal
-import math
 
 
 class _LinearGeometry(object):
@@ -87,9 +85,14 @@ class Line(_LinearGeometry):
         """
         points = iter(points)
         try:
-            start = end = pygonal.Vec2(*points.next())
-            while end == start:
-                end = pygonal.Vec2(*points.next())
+            try:
+                start = end = pygonal.Vec2(*points.__next__())
+                while end == start:
+                    end = pygonal.Vec2(*points.__next__())
+            except AttributeError:
+                start = end = pygonal.Vec2(*points.next())
+                while end == start:
+                    end = pygonal.Vec2(*points.next())
         except StopIteration:
             raise ValueError("Expected iterable of 2 or more distinct points")
         line = _LinearGeometry.__new__(cls)
@@ -256,9 +259,14 @@ class Ray(_LinearGeometry):
         """
         points = iter(points)
         try:
-            start = end = pygonal.Vec2(*points.next())
-            while end == start:
-                end = pygonal.Vec2(*points.next())
+            try:
+                start = end = pygonal.Vec2(*points.__next__())
+                while end == start:
+                    end = pygonal.Vec2(*points.__next__())
+            except AttributeError:
+                start = end = pygonal.Vec2(*points.next())
+                while end == start:
+                    end = pygonal.Vec2(*points.next())
         except StopIteration:
             raise ValueError("Expected iterable of 2 or more distinct points")
         ray = _LinearGeometry.__new__(cls)
@@ -410,7 +418,10 @@ class LineSegment(_LinearGeometry):
         """
         points = iter(points)
         try:
-            start = end = pygonal.Vec2(*points.next())
+            try:
+                start = end = pygonal.Vec2(*points.__next__())
+            except AttributeError:
+                start = end = pygonal.Vec2(*points.next())
         except StopIteration:
             raise ValueError("Expected iterable of 1 or more points")
         furthest = 0.0

@@ -1,9 +1,9 @@
-:class:`planar.Line` -- Infinite Lines
+:class:`pygonal.Line` -- Infinite Lines
 ======================================
 
 .. index:: Line, line class
 
-.. autoclass:: planar.Line
+.. autoclass:: pygonal.Line
 	:members:
 	:inherited-members:
 

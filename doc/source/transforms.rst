@@ -1,13 +1,13 @@
 Transform Objects
 =================
 
-.. currentmodule:: planar
+.. currentmodule:: pygonal
 
 Transform objects are a mathematical mapping from one coordinate system
 to another. The coordinate systems can differ in terms of position (i.e.,
 location of the origin), scale, axis direction and relative axis orientation.
 Transform objects can be applied to other transforms, vectors, or
-shape objects to map them between coordinate systems. 
+shape objects to map them between coordinate systems.
 
 Transforming between coordinate systems may not, at first glance, appear to
 have a lot of practical value.  The value is in realizing that mapping an
@@ -17,7 +17,7 @@ Typically, it is the object itself we are interested in modifying, and not the
 coordinate frame, and linear transforms provide a concise construct for
 representing a myriad of possible mutations.
 
-Planar transforms are represented as linear transformation matrices. However,
+pygonal transforms are represented as linear transformation matrices. However,
 their interface provides abstractions so that common transformation operations
 can be conveniently created and used, without having to worry about the
 underlying matrix math.
@@ -25,7 +25,7 @@ underlying matrix math.
 Affine Transforms
 -----------------
 
-Affine transforms in ``planar`` can represent a variety of linear
+Affine transforms in ``pygonal`` can represent a variety of linear
 transformations in 2D space. Specifically, an affine transform can represent
 a combination of translation, scale, rotation and shear operations.
 
@@ -48,18 +48,18 @@ transformation.
 A 2D affine transform is represented by a 3 X 3 transformation matrix.
 However, the last row of all affine transformation matrices is the fixed
 sequence ``| 0 0 1 |``. Therefore only the first two rows are actually
-significant, and need to be stored. Because of this, :class:`~planar.Affine`
+significant, and need to be stored. Because of this, :class:`~pygonal.Affine`
 objects are stored internally as an array of 6 double-precision floating point
-values. Like :class:`~planar.Vec2` objects, :class:`~planar.Affine` objects
+values. Like :class:`~pygonal.Vec2` objects, :class:`~pygonal.Affine` objects
 are immutable.  Operations that modify a transform always return a new
 transform object.
 
-There are a variety of constructors available for :class:`~planar.Affine` objects.
+There are a variety of constructors available for :class:`~pygonal.Affine` objects.
 It is typical to use an alternate constructor to create affine transforms,
 rather that the default constructor. For example, it is trivial to create the
-simplest :class:`~planar.Affine` transform, the identity transform::
+simplest :class:`~pygonal.Affine` transform, the identity transform::
 
-	>>> from planar import Affine
+	>>> from pygonal import Affine
 	>>> ident = Affine.identity()
 	>>> print(ident)
 	| 1.00, 0.00, 0.00|
@@ -67,9 +67,9 @@ simplest :class:`~planar.Affine` transform, the identity transform::
 	| 0.00, 0.00, 1.00|
 
 The identity transform always leaves an object unchanged when it is applied.
-Printing the :class:`~planar.Affine` instance shows the values in a
+Printing the :class:`~pygonal.Affine` instance shows the values in a
 conventional matrix grid notation. Since the bottom row is always the same for
-all :class:`~planar.Affine` transforms, you can effectively ignore it, but you
+all :class:`~pygonal.Affine` transforms, you can effectively ignore it, but you
 can see the obvious diagonal unity values in the identity transform. The first
 column can be read as the scale and orientation vector for the X-axis, the
 second column as the same vector for the Y-axis, and the third column as the
@@ -79,7 +79,7 @@ has no effect.
 
 Another basic transform is a simple translation::
 
-	>>> from planar import Affine
+	>>> from pygonal import Affine
 	>>> offset = Affine.translation((5, -1))
 	>>> print(offset)
 	| 1.00, 0.00, 5.00|
@@ -91,7 +91,7 @@ that the offset of the origin in the third column is now non-zero.
 
 Another simple transform is a scale::
 
-	>>> from planar import Affine
+	>>> from pygonal import Affine
 	>>> scale = Affine.scale(2.5)
 	>>> print(scale)
 	| 2.50, 0.00, 0.00|
@@ -101,7 +101,7 @@ Another simple transform is a scale::
 The example above applies a scale of 2.5 symmetrically to both axes. If desired,
 a different scale can be specified for each axis::
 
-	>>> from planar import Affine
+	>>> from pygonal import Affine
 	>>> scale = Affine.scale((0.75, 2))
 	>>> print(scale)
 	| 0.75, 0.00, 0.00|
@@ -114,7 +114,7 @@ in the X-axis and double its size along the Y-axis.
 It is also possible to flip an object along an axis by supplying a negative
 scaling factor::
 
-	>>> from planar import Affine
+	>>> from pygonal import Affine
 	>>> flip_x = Affine.scale((-1, 1))
 	>>> print(flip_x)
 	|-1.00, 0.00, 0.00|
@@ -127,7 +127,7 @@ an object along the X-axis, mirroring it across the origin.
 More sophisticated transforms can modify coordinates in more complex
 ways, such as applying rotation::
 
-	>>> from planar import Affine
+	>>> from pygonal import Affine
 	>>> rot90 = Affine.rotation(90)
 	>>> print(rot90)
 	| 0.00, 1.00, 0.00|
@@ -151,7 +151,7 @@ By default, rotation transforms are performed about the origin. You can
 specify another point to rotate around using the optional ``pivot``
 argument::
 
-	>>> from planar import Affine
+	>>> from pygonal import Affine
 	>>> rot = Affine.rotation(45, pivot=(-3, 8))
 	>>> print(rot)
 	| 0.71, 0.71, 4.78|
@@ -162,11 +162,11 @@ You can see that this includes a translation in the matrix values. You can
 use the pivot to rotate an object about its center, or rotate an object
 about another object.
 
-The last :class:`~planar.Affine` constructor allows the creation of shear
+The last :class:`~pygonal.Affine` constructor allows the creation of shear
 transforms.  Shears can alter the angle of the X and Y axes relative to one
 another::
 
-	>>> from planar import Affine
+	>>> from pygonal import Affine
 	>>> shear = Affine.shear(30)
 	>>> print(shear)
 	| 1.00, 0.00, 0.00|
@@ -176,7 +176,7 @@ another::
 The above applies a 30 degree shear to the X-axis, and leaves the Y-axis
 unchanged. We can also create a shear for both axes::
 
-	>>> from planar import Affine
+	>>> from pygonal import Affine
 	>>> shear = Affine.shear(-45, 15)
 	>>> print(shear)
 	| 1.00, 0.27, 0.00|
@@ -187,20 +187,20 @@ A shear transform can alter the shape of an object. For example, shearing a
 rectangle results in a parallelogram; shearing a circle results in an
 ellipse.
 
-The final way to construct an :class:`~planar.Affine` instance is to use the
+The final way to construct an :class:`~pygonal.Affine` instance is to use the
 default constructor.  This accepts 6 floating point arguments that are
 assigned row-wise to the top 2 rows of the transformation matrix. This is
 probably only useful if you have a fixed, pre-calculated set of matrix values
 that you want to use::
 
-	>>> from planar import Affine
+	>>> from pygonal import Affine
 	>>> affine = Affine(0.2, 0.3, 0.4, 0.5, 0.6, 0.7)
 	>>> print(affine)
 	| 0.20, 0.30, 0.40|
 	| 0.50, 0.60, 0.70|
 	| 0.00, 0.00, 1.00|
 
-Regardless of how you instantiate :class:`~planar.Affine`, you can access the
+Regardless of how you instantiate :class:`~pygonal.Affine`, you can access the
 values in the matrix as elements of a row-wise sequence::
 
 	>>> len(affine)
@@ -221,7 +221,7 @@ multiplication. Combining transforms is powerful, because it allows you
 literally combine the effects of multiple different transformations into one.
 For example, suppose you have two transforms, a rotation and a scale::
 
-	>>> from planar import Affine
+	>>> from pygonal import Affine
 	>>> rot = Affine.rotation(30)
 	>>> scale = Affine.scale(2)
 
@@ -233,7 +233,7 @@ operations at once by multiplying them::
 Multiplying the two transforms performs a matrix multiplication of the
 transformation matrices and creates a new affine instance from the resulting
 matrix. Note that multiplying two affine transforms always results in an
-affine transform, with its parallel-preserving properties. 
+affine transform, with its parallel-preserving properties.
 
 It's important to understand that matrix multiplication is not always
 commutative, and thus is order-dependant. For example, rotating an object
@@ -247,14 +247,14 @@ Often when working with transforms, it is useful to inspect them in
 terms of certain high-level mathematical properties. These properties
 can expose important facts, and limitations of a specific transform.
 
-Boolean properties of :class:`~planar.Affine` instances are exposed in several
+Boolean properties of :class:`~pygonal.Affine` instances are exposed in several
 ``is_*`` attributes. All of these properties can be determined by examining
 the transform matrix values directly yourself, but using the built-in property
 attributes is more convenient and efficient.
 
 ``is_identity`` -- True if the transform is effectively the identity
 transform. Identity transforms may be created directly, of course, but
-may also be the result of combining inverse transforms, such as a 
+may also be the result of combining inverse transforms, such as a
 scale of ``2.0``, and a scale of ``0.5``.
 
 ``is_rectilinear`` -- True if applying the transform would preserve the
@@ -280,9 +280,9 @@ transform (i.e., the determinant) is effectively zero. Degenerate transforms
 cannot be inverted, because they are "lossy" by completely removing
 information in one or both dimensions.
 
-.. note:: 
-	All boolean properties of transforms operate within 
-	the rounding limits specified by :attr:`planar.EPSILON`. This allows
+.. note::
+	All boolean properties of transforms operate within
+	the rounding limits specified by :attr:`pygonal.EPSILON`. This allows
 	them to operate intuitively in the face of floating point
 	precision limits.
 
@@ -308,13 +308,13 @@ such transforms cannot be inverted.
 ``column_vectors`` -- A 3-tuple containing the 2D column vectors from
 the transformation vector. Since the bottom row of every affine transform
 is fixed, the column vectors contain only the top 2 rows. The vectors
-define the X-axis, Y-axis, and origin respectively of the transform's 
+define the X-axis, Y-axis, and origin respectively of the transform's
 coordinate system.
 
 Other Operations
 ~~~~~~~~~~~~~~~~
 
-As you might expect, :class:`~planar.Affine` instances support equality
+As you might expect, :class:`~pygonal.Affine` instances support equality
 comparisons.  These simply compare the transformation matrix values directly.
 Affine transforms also support an :meth:`Affine.almost_equals` method for
 approximate comparison, which is useful to compensate for floating point
@@ -322,7 +322,7 @@ precision limits.
 
 Other comparison operations, such as greater or less than are not supported.
 
-The only arithmetic operation supported for :class:`~planar.Affine` transforms is
+The only arithmetic operation supported for :class:`~pygonal.Affine` transforms is
 multiplication. This is because it is the only operation that can guarantee
 that the result is also an affine transform.
 

@@ -41,7 +41,10 @@ class BoundingBox(object):
     def _init_min_max(self, points):
         points = iter(points)
         try:
-            min_x, min_y = max_x, max_y = points.next()
+            try:
+                min_x, min_y = max_x, max_y = points.__next__()
+            except AttributeError:
+                min_x, min_y = max_x, max_y = points.next()
         except StopIteration:
             raise ValueError('BoundingBox() requires at least one point')
         for x, y in points:
@@ -113,7 +116,10 @@ class BoundingBox(object):
         """
         shapes = iter(shapes)
         try:
-            shape = shapes.next()
+            try:
+                shape = shapes.__next__()
+            except AttributeError:
+                shape = shapes.next()
         except StopIteration:
             raise ValueError(
                 "BoundingBox.from_shapes(): requires at least one shape")
@@ -226,6 +232,7 @@ class BoundingBox(object):
         """Return True if this bounding box is approximately equal to another
         box, within precision limits.
         """
+        print(other)
         return (self.__class__ is other.__class__
             and self.min_point.almost_equals(other.min_point)
             and self.max_point.almost_equals(other.max_point))

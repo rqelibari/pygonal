@@ -26,7 +26,10 @@ import unittest
 '''
 """BoundingBox class unit tests"""
 
+
 def seq_almost_equal(t1, t2, error=0.00001):
+    import pygonal
+    error = pygonal.EPSILON2
     assert len(t1) == len(t2), "%r != %r" % (t1, t2)
     for m1, m2 in zip(t1, t2):
         assert abs(m1 - m2) <= error, "%r != %r" % (t1, t2)
@@ -318,8 +321,7 @@ class BoundingBoxBaseTestCase(object):
         assert a.almost_equals(self.BoundingBox([(-6,0), (-4,2), (-5,0)]))
         assert a.almost_equals(self.BoundingBox(
             [(-4 + pygonal.EPSILON / 2, 0), (-6,2 - pygonal.EPSILON / 2)]))
-        assert not a.almost_equals(self.BoundingBox(
-            [(-4 + pygonal.EPSILON, 0), (-6,2)]))
+        assert not a.almost_equals(self.BoundingBox([(-4 + pygonal.EPSILON, 0), (-6,2)]))
         assert not a.almost_equals(self.BoundingBox([(-4,0), (-5,2)]))
         assert not a.almost_equals(None)
 
