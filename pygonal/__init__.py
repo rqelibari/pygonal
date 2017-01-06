@@ -64,7 +64,7 @@ def set_epsilon(epsilon):
     EPSILON2 = EPSILON**2
     _set_epsilon(EPSILON)
 
-set_epsilon(1e-2)
+set_epsilon(1e-5)
 
 
 # vim: ai ts=4 sts=4 et sw=4 tw=78

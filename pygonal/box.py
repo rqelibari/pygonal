@@ -232,7 +232,6 @@ class BoundingBox(object):
         """Return True if this bounding box is approximately equal to another
         box, within precision limits.
         """
-        print(other)
         return (self.__class__ is other.__class__
             and self.min_point.almost_equals(other.min_point)
             and self.max_point.almost_equals(other.max_point))

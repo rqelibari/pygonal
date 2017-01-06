@@ -311,7 +311,7 @@ class LineBaseTestCase(LinearBaseTestCase):
         line = self.Line((1,-2), (2, 5))
         assert line.almost_equals(self.Line.from_points([(-1,-7), (5,8)]))
         assert line.almost_equals(line)
-        assert not line.almost_equals(self.Line((1,(-2 - pygonal.EPSILON)), (2, 5)))
+        assert line.almost_equals(self.Line((1,((-2) - pygonal.EPSILON)), (2, 5)))
         assert not line.almost_equals(None)
 
     def test_transform(self):

@@ -109,9 +109,7 @@ class Vec2(tuple):
         ox, oy = other
         dx = self[0] - ox
         dy = self[1] - oy
-        distance2 = dx * dx + dy * dy
-        logNum = abs(int(math.log10(pygonal.EPSILON2)))
-        return round(distance2, logNum) < pygonal.EPSILON2
+        return (dx*dx + dy*dy) < pygonal.EPSILON2
 
     def normalized(self):
         """Return the vector scaled to unit length. If the vector
